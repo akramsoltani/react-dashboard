@@ -17,22 +17,24 @@ import MailIcon from '@material-ui/icons/Mail';
 
 import {Link} from 'react-router-dom';
 
+import Notifications from 'pages/Notifications';
+import Homepage from 'pages/Homepage';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom' ;
+
 
 //Arbitrary Width, to be changed later
 const drawerWidth = 250;
+
+const BGImage = "https://www.digthischick.net/wp-content/uploads/2012/09/sidebar-background-e1349887026985.jpg";
 
 //Styling
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
-  nvstl: {
-    color: 'gray',
-    width: '50%',
-    listStyle: 'none',
-  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    background: 'gray',
   },
   drawer: {
     width: drawerWidth,
@@ -40,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundImage: `url(${BGImage})`,
+    backgroundSize: '100%',
   },
   drawerContainer: {
     overflow: 'auto',
@@ -56,12 +60,13 @@ export default function ClippedDrawer() {
   const NotifLink = props => <Link to={"/notifications"} {...props} />;
 
   return (
+    <Router>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            Clipped drawer
+            ROADEO
           </Typography>
         </Toolbar>
       </AppBar>
@@ -98,17 +103,12 @@ export default function ClippedDrawer() {
       <main className={classes.content}>
         <Toolbar />
         
+      <Switch>
+        <Route path="/" exact component={Homepage} />
+        <Route path="/notifications" component={Notifications} />
+      </Switch>
       </main>
     </div>
+      </Router>
   );
 }
-
-/* Was on line 65
- <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>*/
