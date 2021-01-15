@@ -11,7 +11,8 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
-    maxWidth: 900,
+    maxWidth: 750,
+    padding: 150,
   },
 });
 
@@ -34,7 +35,7 @@ export default function NotificationTable() {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow /*component={Link} to={`/bond/${n}/`} key={n}*/>
             <TableCell>Dessert (100g serving)</TableCell>
             <TableCell align="right">Calories</TableCell>
             <TableCell align="right">Fat&nbsp;(g)</TableCell>
@@ -57,5 +58,6 @@ export default function NotificationTable() {
         </TableBody>
       </Table>
     </TableContainer>
+
   );
 }
