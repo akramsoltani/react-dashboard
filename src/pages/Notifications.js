@@ -5,7 +5,7 @@ import NotificationTable from 'components/NotificationTable';
 function Notifications() {
   return (
     <div>
-      <h1>Notifications</h1>
+      <h1 style={{color: '#F4F4F4'}}>Notifications</h1>
       <NotificationTable />
     </div>
     

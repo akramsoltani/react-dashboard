@@ -12,8 +12,10 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+
+import HomeIcon from '@material-ui/icons/Home';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 import {Link} from 'react-router-dom';
 
@@ -25,7 +27,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom' ;
 //Arbitrary Width, to be changed later
 const drawerWidth = 250;
 
-const BGImage = "https://www.digthischick.net/wp-content/uploads/2012/09/sidebar-background-e1349887026985.jpg";
+//const BGImage = "https://www.digthischick.net/wp-content/uploads/2012/09/sidebar-background-e1349887026985.jpg";
 
 //Styling
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    background: 'gray',
+    background: '#003345',
   },
   drawer: {
     width: drawerWidth,
@@ -42,15 +44,18 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundImage: `url(${BGImage})`,
-    backgroundSize: '100%',
+    //backgroundImage: `url(${BGImage})`,
+    backgroundColor: '#DFDFDF',
   },
   drawerContainer: {
     overflow: 'auto',
+    whiteSpace: 'pre-wrap',
+    overflowWrap: 'break-word'
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    backgroundColor: '#0F6475',
   },
 }));
 
@@ -65,7 +70,7 @@ export default function ClippedDrawer() {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h5" noWrap>
             ROADEO
           </Typography>
         </Toolbar>
@@ -81,27 +86,25 @@ export default function ClippedDrawer() {
         <div className={classes.drawerContainer}>
         <List>
           <ListItem button component={HomeLink}>
-            <ListItemIcon><InboxIcon /></ListItemIcon>
-            <ListItemText primary={'Homepage'} />
+            <ListItemIcon style={{color: '#003345'}}><HomeIcon /></ListItemIcon>
+            <ListItemText style={{color: '#003345'}} primary={'Homepage'} />
           </ListItem>
           <ListItem button component={NotifLink}>
-            <ListItemIcon><MailIcon /></ListItemIcon>
-            <ListItemText primary={'Notifications'} />
+            <ListItemIcon style={{color: '#003345'}}><NotificationsActiveIcon /></ListItemIcon>
+            <ListItemText style={{color: '#003345'}} primary={'Notifications'} />
           </ListItem>
         </List>
         <Divider />
           <List>
-            {['My account', 'Some other thing', 'YEAAAAAAAAAH'].map((text, index) => (
-              <ListItem button key={text} component={NotifLink}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+          <ListItem button>
+            <ListItemIcon style={{color: '#003345'}}><ArrowUpwardIcon /></ListItemIcon>
+            <ListItemText style={{color: '#003345'}} primary={'Upgrade Plan'} />
+          </ListItem>
           </List>
         </div>
       </Drawer>
       <main className={classes.content}>
-        <Toolbar />
+        <Toolbar disableGutters={true}	/>
         
       <Switch>
         <Route path="/" exact component={Homepage} />

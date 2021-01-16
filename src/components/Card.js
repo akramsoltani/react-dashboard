@@ -32,7 +32,7 @@ export default function Card() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container spacing={2}>
+        <Grid spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
               <img className={classes.img} alt="complex" src="https://res.cloudinary.com/aw0696/image/upload/v1537020594/Startup-01.png" />
@@ -42,7 +42,7 @@ export default function Card() {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                  Standard license
+                  Standard POS
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   Full resolution 1920x1080 • JPEG
