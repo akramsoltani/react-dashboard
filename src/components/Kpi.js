@@ -9,6 +9,9 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import MailIcon from '@material-ui/icons/Mail';
 
+import LinGraph from './LinGraph';
+import {bob, bob2, bob3} from 'sampleData';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -21,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 0 auto',
   },
   cover: {
-    width: 110,
-    height: 110,
+    width: 151,
+    height: 151,
     borderRadius: '50%',
-    margin: '30px'
+    margin: '20px'
   },
   controls: {
     display: 'flex',
@@ -42,7 +45,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MediaControlCard() {
+//Testing Data
+const TestAverage = "39/100";
+const TestChange = "3% per year";
+
+export default function KpiGraph() {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -51,25 +58,19 @@ export default function MediaControlCard() {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography noWrap component='subtitle1' variant='subtitle1'>
-            Account Details
+            Predicted KPI cycle
           </Typography>
           <Typography className={classes.name} component='h5' variant='h5'>
-            Akram Soltani
+            {TestAverage}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Customer: @address
+            {TestChange}
           </Typography>
         </CardContent>
-        <IconButton aria-label="Email">
-            <MailIcon className={classes.playIcon} />
-          </IconButton>
       </div>
-      <CardMedia
-        className={classes.cover}
-        image="https://res.cloudinary.com/aw0696/image/upload/v1610752617/IMG_20210108_121041_-_Copie.jpg"
-        title="Live from space album cover"
-      />
-      
+      <div>
+      <LinGraph customData={bob}/>
+      </div>
 
     </Card>
   );

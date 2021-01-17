@@ -2,38 +2,28 @@ import React from 'react';
 import { VictoryChart, VictoryArea, VictoryAxis, VictoryTheme, VictoryLegend } from 'victory';
 
 const RandomTitle = () => ("This is a title")
-const RandomData = () => ("This is a data")
+const RandomData = () => ("3000")
 
 export default function LinGraph(props) {
     
     return (
         <div>
         <VictoryChart 
-        width={300} height={200}
+        width={400} height={300}
         maxDomain={{ y: 7 }}
         theme={VictoryTheme.grayscale}
-        style={{parent: {
-            border: "1px solid #abb"
-          },
+        style={{
           background: {
             fill: "gray"
           },
         }}>
-            <VictoryLegend x={20} y={10}
-                title= {RandomTitle}
-                titleOrientation= "left"
-                gutter={20}
-                orientation="horizontal"
-                style={{ title: {padding: 7 } }}
-                data={[
-                { name: (RandomData) , symbol: { fill: "gray" } },
-                ]}
-            />
+            
             <VictoryArea data={props.customData}/>
             <VictoryAxis
-            label="Label"
+            label= {RandomData}
             style={{
-              axisLabel: {padding: 30},
+              tickLabels: {fontFamily: 'Roboto', padding: 5},
+              axisLabel: {padding: 30, fontFamily: 'Roboto'},
               grid: {
                 stroke: "gold",
                 strokeWidth: 0.5,
@@ -43,6 +33,7 @@ export default function LinGraph(props) {
             theme={VictoryTheme.grayscale} tickValues={[1, 2, 3, 4, 5, 6]}/>  
             <VictoryAxis
             style={{
+                tickLabels: {fontFamily: 'Roboto', padding: 8},
                 grid: {
                   stroke: "gold",
                   strokeWidth: 0.5
@@ -53,3 +44,16 @@ export default function LinGraph(props) {
         </div>
     );
   }
+
+  /*<VictoryLegend x={45} y={10}
+                title= {RandomTitle}
+                titleOrientation= "left"
+                gutter={20}
+                orientation="horizontal"
+                data={[
+                  { name: (RandomData) , symbol: { fill: "gray" }  },
+                  ]}
+                style={{ title: {padding: 7, fontFamily: 'Roboto'},
+                          data: {fontFamily: 'Roboto'} }}
+                
+            />*/
