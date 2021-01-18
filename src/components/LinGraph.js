@@ -1,59 +1,93 @@
 import React from 'react';
-import { VictoryChart, VictoryArea, VictoryAxis, VictoryTheme, VictoryLegend } from 'victory';
+import { VictoryChart, VictoryArea, VictoryAxis, VictoryTheme, VictoryLegend, VictoryLine } from 'victory';
 
 const RandomTitle = () => ("This is a title")
 const RandomData = () => ("3000")
 
-export default function LinGraph(props) {
+function LinGraph(props) {
     
     return (
         <div>
         <VictoryChart 
-        width={400} height={300}
-        maxDomain={{ y: 7 }}
-        theme={VictoryTheme.grayscale}
+        minDomain={{ y: 0 }}
+        //width={320}
+        height={180}
+        theme={VictoryTheme.material}
         style={{
           background: {
-            fill: "gray"
+            fill: "#061218"
           },
         }}>
             
-            <VictoryArea data={props.customData}/>
+            <VictoryLine style={{data: { stroke: "#1ECC82" }}} 
+            data={props.customData}/>
             <VictoryAxis
-            label= {RandomData}
             style={{
-              tickLabels: {fontFamily: 'Roboto', padding: 5},
-              axisLabel: {padding: 30, fontFamily: 'Roboto'},
               grid: {
-                stroke: "gold",
-                strokeWidth: 0.5,
-                
+                strokeWidth: 0
                 },
-            }} 
-            theme={VictoryTheme.grayscale} tickValues={[1, 2, 3, 4, 5, 6]}/>  
+                axis: {stroke: "transparent"}, 
+            ticks: {stroke: "transparent"},
+            tickLabels: { fill:"transparent"}
+            }}/>  
             <VictoryAxis
             style={{
-                tickLabels: {fontFamily: 'Roboto', padding: 8},
                 grid: {
-                  stroke: "gold",
-                  strokeWidth: 0.5
+                  strokeWidth: 0
                   },
+                  axis: {stroke: "transparent"}, 
+              ticks: {stroke: "transparent"},
+              tickLabels: { fill:"transparent"}
             }} 
-            theme={VictoryTheme.grayscale} dependentAxis tickValues={[2, 4, 6, 4]}/>
+            />
         </VictoryChart>
         </div>
     );
   }
 
-  /*<VictoryLegend x={45} y={10}
-                title= {RandomTitle}
-                titleOrientation= "left"
-                gutter={20}
-                orientation="horizontal"
-                data={[
-                  { name: (RandomData) , symbol: { fill: "gray" }  },
-                  ]}
-                style={{ title: {padding: 7, fontFamily: 'Roboto'},
-                          data: {fontFamily: 'Roboto'} }}
-                
-            />*/
+  function AreaGraph(props) {
+    
+    return (
+        <div>
+        <VictoryChart 
+        minDomain={{ y: 0 }}
+        //width={320}
+        height={180}
+        theme={VictoryTheme.material}
+        style={{
+          background: {
+            fill: "#061218"
+          },
+        }}>
+            
+            <VictoryArea style={{
+            data: {
+            fill: '#0A2634',
+            stroke: "#C8A007" },
+            }} 
+            data={props.customData}/>
+            <VictoryAxis
+            style={{
+              grid: {
+                strokeWidth: 0
+                },
+                axis: {stroke: "transparent"}, 
+            ticks: {stroke: "transparent"},
+            tickLabels: { fill:"transparent"}
+            }}/>  
+            <VictoryAxis
+            style={{
+                grid: {
+                  strokeWidth: 0
+                  },
+                  axis: {stroke: "transparent"}, 
+              ticks: {stroke: "transparent"},
+              tickLabels: { fill:"transparent"}
+            }} 
+            />
+        </VictoryChart>
+        </div>
+    );
+  }
+
+  export {LinGraph, AreaGraph}

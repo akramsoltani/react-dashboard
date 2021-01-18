@@ -9,71 +9,77 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import MailIcon from '@material-ui/icons/Mail';
 
+import {LinGraph} from './LinGraph';
+import {bob, bob2, bob3} from 'sampleData';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'left',
     backgroundColor: '#061218',
   },
   details: {
     display: 'flex',
     flexDirection: 'column',
   },
+  details2: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
   content: {
-    flex: '1 0 auto',
-    color: 'white'
+    marginBottom: '-10px',
+    marginTop: '-10px',
+    color: 'white',
   },
   cover: {
-    width: 110,
-    height: 110,
+    width: 151,
+    height: 151,
     borderRadius: '50%',
-    margin: '30px'
   },
   controls: {
     display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
   },
   playIcon: {
     height: 38,
     width: 38,
-    align: 'center',
-    color: 'white'
+    align: 'center'
   },
   name: {
     fontWeight: 'bold',
+    alignItems: 'left'
   }
 }));
 
-export default function MediaControlCard() {
+//Testing Data
+const TestAverage = "39/100";
+const TestChange = "3% per 1 year";
+
+export default function KpiLine() {
   const classes = useStyles();
   const theme = useTheme();
 
   return (
     <Card className={classes.root}>
-      <div className={classes.details}>
+      <div>
         <CardContent className={classes.content}>
           <Typography noWrap component='subtitle1' variant='subtitle1'>
-            Account Details
+            Pavement Condition Index (PCI)
           </Typography>
-          <Typography className={classes.name} component='h5' variant='h5'>
-            Akram Soltani
-          </Typography>
-          <Typography variant="subtitle1" color="white">
-            Customer: @address
-          </Typography>
-          <IconButton aria-label="Email">
-            <MailIcon className={classes.playIcon} />
-          </IconButton>
         </CardContent>
       </div>
-      <CardMedia
-        className={classes.cover}
-        image="https://res.cloudinary.com/aw0696/image/upload/v1610752617/IMG_20210108_121041_-_Copie.jpg"
-        title="Live from space album cover"
-      />
       
-
+      <div className={classes.details2}>
+        <CardContent className={classes.content}>
+          <Typography noWrap style={{fontWeight: 'bold', fontSize: '33px', paddingRight: '28px'}}>
+            {TestAverage}
+          </Typography>
+          <Typography noWrap variant="subtitle1" color='white'>
+            {TestChange}
+          </Typography>
+        </CardContent>
+        <LinGraph customData={bob}/>
+      </div>    
     </Card>
   );
 }

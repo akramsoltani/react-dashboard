@@ -9,31 +9,31 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import MailIcon from '@material-ui/icons/Mail';
 
-import LinGraph from './LinGraph';
+import {AreaGraph} from './LinGraph';
 import {bob, bob2, bob3} from 'sampleData';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: '#061218',
   },
   details: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
   },
   content: {
-    flex: '1 0 auto',
+    marginBottom: '-10px',
+    marginTop: '-10px',
+    color: 'white',
   },
   cover: {
     width: 151,
     height: 151,
     borderRadius: '50%',
-    margin: '20px'
   },
   controls: {
     display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
   },
   playIcon: {
     height: 38,
@@ -42,36 +42,39 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     fontWeight: 'bold',
+    alignItems: 'left'
   }
 }));
 
 //Testing Data
-const TestAverage = "39/100";
-const TestChange = "3% per year";
+const TestAverage = "3.7 years";
+const TestChange = "8% of service life";
 
-export default function KpiGraph() {
+export default function KpiArea() {
   const classes = useStyles();
   const theme = useTheme();
 
   return (
     <Card className={classes.root}>
-      <div className={classes.details}>
+      <div>
         <CardContent className={classes.content}>
           <Typography noWrap component='subtitle1' variant='subtitle1'>
-            Predicted KPI cycle
-          </Typography>
-          <Typography className={classes.name} component='h5' variant='h5'>
-            {TestAverage}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {TestChange}
+            Predicted Lifecycle w/o intervention
           </Typography>
         </CardContent>
       </div>
-      <div>
-      <LinGraph customData={bob}/>
-      </div>
-
+      
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Typography noWrap style={{fontWeight: 'bold', fontSize: '33px'}}>
+            {TestAverage}
+          </Typography>
+          <Typography  variant="subtitle1" color='white'>
+            {TestChange}
+          </Typography>
+        </CardContent>
+        <AreaGraph customData={bob}/>
+      </div>    
     </Card>
   );
 }

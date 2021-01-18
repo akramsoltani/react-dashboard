@@ -8,6 +8,9 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
+import {Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom' ;
+import SkeletonChildren from 'components/Loader';
 
 const client = new ApolloClient({
   uri: "https://react-recruitment.musbenlahrech.repl.co/",
@@ -24,17 +27,22 @@ function NotificationQuery() {
     }
   `);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <SkeletonChildren />;
   if (error) return <p>Error :(</p>;
 
   return data.notifications.map(({ id, type }) => (
-    <div key={id}>
+    <Router><div key={id}>
+      <Link style={{color: 'white'}} to={`/notifications/${id}`}>
       <p>
         {id}: {type}
       </p>
+      </Link>
     </div>
+    </Router>
   ));
 }
+
+
 
 function NotificationTable() {
   return (

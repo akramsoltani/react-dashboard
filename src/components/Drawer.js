@@ -15,14 +15,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import SettingsIcon from '@material-ui/icons/Settings';
+import SearchIcon from '@material-ui/icons/Search';
 
 import {Link} from 'react-router-dom';
 
 import Notifications from 'pages/Notifications';
 import Homepage from 'pages/Homepage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom' ;
-
+import Notification from 'pages/Notification';
 
 //Arbitrary Width, to be changed later
 const drawerWidth = 250;
@@ -33,10 +34,11 @@ const drawerWidth = 250;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    marginTop: -drawerWidth/3,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    background: '#003345',
+    background: '#061218',
   },
   drawer: {
     width: drawerWidth,
@@ -45,21 +47,22 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     //backgroundImage: `url(${BGImage})`,
-    backgroundColor: '#DFDFDF',
+    backgroundColor: '#061218',
   },
   drawerContainer: {
+    paddingTop: '5%',
     overflow: 'auto',
     whiteSpace: 'pre-wrap',
-    overflowWrap: 'break-word'
+    overflowWrap: 'break-word',
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    backgroundColor: '#0F6475',
+    backgroundColor: '#0A2634',
   },
 }));
 
-export default function ClippedDrawer() {
+export default function ClippedDrawer(props) {
   const classes = useStyles();
   const HomeLink = props => <Link to={"/"} {...props} />;
   const NotifLink = props => <Link to={"/notifications"} {...props} />;
@@ -71,7 +74,7 @@ export default function ClippedDrawer() {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h5" noWrap>
-            ROADEO
+          ROADEO
           </Typography>
         </Toolbar>
       </AppBar>
@@ -86,19 +89,23 @@ export default function ClippedDrawer() {
         <div className={classes.drawerContainer}>
         <List>
           <ListItem button component={HomeLink}>
-            <ListItemIcon style={{color: '#003345'}}><HomeIcon /></ListItemIcon>
-            <ListItemText style={{color: '#003345'}} primary={'Homepage'} />
+            <ListItemIcon style={{color: 'white'}}><HomeIcon /></ListItemIcon>
+            <ListItemText style={{color: 'white'}} primary={'Homepage'} />
           </ListItem>
           <ListItem button component={NotifLink}>
-            <ListItemIcon style={{color: '#003345'}}><NotificationsActiveIcon /></ListItemIcon>
-            <ListItemText style={{color: '#003345'}} primary={'Notifications'} />
+            <ListItemIcon style={{color: 'white'}}><NotificationsActiveIcon /></ListItemIcon>
+            <ListItemText style={{color: 'white'}} primary={'Notifications'} />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon style={{color: 'white'}}><SearchIcon /></ListItemIcon>
+            <ListItemText style={{color: 'white'}} primary={'Search'} />
           </ListItem>
         </List>
         <Divider />
           <List>
           <ListItem button>
-            <ListItemIcon style={{color: '#003345'}}><ArrowUpwardIcon /></ListItemIcon>
-            <ListItemText style={{color: '#003345'}} primary={'Upgrade Plan'} />
+            <ListItemIcon style={{color: '#C8A007'}}><SettingsIcon /></ListItemIcon>
+            <ListItemText style={{color: '#C8A007'}} primary={'Settings'} />
           </ListItem>
           </List>
         </div>
@@ -108,7 +115,8 @@ export default function ClippedDrawer() {
         
       <Switch>
         <Route path="/" exact component={Homepage} />
-        <Route path="/notifications" component={Notifications} />
+        <Route path="/notifications" exact component={Notifications} />
+        <Route path="/notifications/:id" exact component={Notification} />
       </Switch>
       </main>
     </div>
