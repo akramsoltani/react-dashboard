@@ -1,24 +1,24 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import LineGraph from 'components/Graphs/LineGraph';
+import AreaGraph from 'components/Graphs/AreaGraph';
+
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import MailIcon from '@material-ui/icons/Mail';
-
-import {AreaGraph} from './LinGraph';
-import {bob, bob2, bob3} from 'sampleData';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'left',
     backgroundColor: '#061218',
   },
   details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  details2: {
     display: 'flex',
     flexDirection: 'row',
   },
@@ -46,35 +46,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-//Testing Data
-const TestAverage = "3.7 years";
-const TestChange = "8% of service life";
-
-export default function KpiArea() {
+export default function KpiCard(props) {
   const classes = useStyles();
-  const theme = useTheme();
+  const graphType = props.graphType;
+  const {id, name, avg, data, change } = props.kpiData;
 
   return (
     <Card className={classes.root}>
       <div>
         <CardContent className={classes.content}>
           <Typography noWrap component='subtitle1' variant='subtitle1'>
-            Predicted Lifecycle w/o intervention
+            {name}
           </Typography>
         </CardContent>
       </div>
-      
-      <div className={classes.details}>
+      <div className={classes.details2}>
         <CardContent className={classes.content}>
-          <Typography noWrap style={{fontWeight: 'bold', fontSize: '33px'}}>
-            {TestAverage}
+          <Typography noWrap style={{fontWeight: 'bold', fontSize: '33px', paddingRight: '28px'}}>
+            {avg}
           </Typography>
-          <Typography  variant="subtitle1" color='white'>
-            {TestChange}
+          <Typography noWrap variant="subtitle1" color='white'>
+            {change}
           </Typography>
         </CardContent>
-        <AreaGraph customData={bob}/>
-      </div>    
+        {graphType ? <LineGraph key={id} data={data}/> : <AreaGraph key={id} data={data}/>}
+      </div>
     </Card>
   );
 }
+

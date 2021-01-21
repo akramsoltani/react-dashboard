@@ -5,8 +5,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import MailIcon from '@material-ui/icons/Mail';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     width: 110,
     height: 110,
     borderRadius: '50%',
-    margin: '30px'
+    margin: '40px'
   },
   controls: {
     display: 'flex',
@@ -45,10 +43,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MediaControlCard() {
+export default function ProfileCard(props) {
   const classes = useStyles();
-  const theme = useTheme();
-
+  const {name, email, id, photo} = props.profileData;
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
@@ -57,10 +54,10 @@ export default function MediaControlCard() {
             Account Details
           </Typography>
           <Typography className={classes.name} component='h5' variant='h5'>
-            Akram Soltani
+            {name}
           </Typography>
           <Typography variant="subtitle1" color="white">
-            Customer: @address
+            {email}
           </Typography>
           <IconButton aria-label="Email">
             <MailIcon className={classes.playIcon} />
@@ -69,11 +66,9 @@ export default function MediaControlCard() {
       </div>
       <CardMedia
         className={classes.cover}
-        image="https://res.cloudinary.com/aw0696/image/upload/v1610752617/IMG_20210108_121041_-_Copie.jpg"
+        image={photo}
         title="Live from space album cover"
       />
-      
-
     </Card>
   );
 }

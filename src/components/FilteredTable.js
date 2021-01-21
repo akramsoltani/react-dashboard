@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   title: {
@@ -31,40 +31,36 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(location, type, date) {
-  return { location, type, date };
-}
-
-const rows = [
-  createData('Route', 'PCI51', 'Yesterday'),
-  createData('Highway', '50M subs', '3 days ago'),
-  createData('Mainstreet', 'UCI80%', '5 days ago'),
-]
-
-export default function FilteredTable() {
+export default function FilteredTable(props) {
   const classes = useStyles();
-
+  const rows = props.rows;
+  const columnNames = props.columnNames || ["Location", "Type", "Date"];
+  const tableName = props.tableName;
+  const Linkable = props.Linkable;
   return (
     <TableContainer component={Paper}>
       <Typography className={classes.title} align="left" variant="h6" id="tableTitle" component="div">
-        Notifications List
+        {tableName}
       </Typography>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
+          
           <TableRow>
-            <TableCell className={classes.cells}>Location</TableCell>
-            <TableCell className={classes.cells} align="center">Type</TableCell>
-            <TableCell className={classes.cells} align="center">Date</TableCell>
+            {columnNames.map((name, index) => (
+              <TableCell key={index} className={classes.cells} align="center">{name}</TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell className={classes.cells} component="th" scope="row">
-                {row.location}
-              </TableCell>
-              <TableCell className={classes.cells} align="center">{row.type}</TableCell>
-              <TableCell className={classes.cells} align="center">{row.date}</TableCell>
+          {rows.map(({id, cells}, index) => (
+            <TableRow key={index}> 
+            {cells.map((cell, index) => (
+            <TableCell key={index} className={classes.cells}>
+              {Linkable ? 
+              <Link style={{color: 'white'}} to={`/notifications/${id}`}>{cell}</Link>
+              : <Typography style={{color: 'white'}}>{cell}</Typography>}
+            </TableCell>
+            ))}
             </TableRow>
           ))}
         </TableBody>
