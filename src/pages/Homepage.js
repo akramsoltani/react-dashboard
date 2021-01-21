@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 function Homepage() {
   const classes = useStyles();
   
-  const { loading, error, data } = useQuery(GET_HOMEPAGEDATA);
+  const { loading, error, data } = useQuery(GET_HOMEPAGEDATA, { fetchPolicy: "no-cache"});
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 

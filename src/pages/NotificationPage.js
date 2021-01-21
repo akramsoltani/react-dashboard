@@ -44,7 +44,8 @@ function Notification() {
   const {id} = useParams();
   console.log(id);
   const { loading, error, data } = useQuery(NOTIF_BYID, {
-    variables: {id: Number(id)}
+    variables: {id: Number(id)},
+    fetchPolicy: "no-cache"
   });
   if (loading) return <p>Loading...</p>;
   if (error) {console.log(error);
