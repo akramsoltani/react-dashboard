@@ -7,9 +7,11 @@ import NotificationMap from 'components/Maps/NotificationMap';
 import KpiCard from "components/Cards/KpiCard";
 import FilteredTable from 'components/FilteredTable';
 import { useQuery } from '@apollo/client';
-import { NOTIF_BYID } from "API/queries";
+import { NOTIF_BYID } from "API/notificationQueries";
 //Import Notification Page ID
 import { useParams } from 'react-router-dom';
+import PicturesCard from 'components/Cards/PicturesCard';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -20,12 +22,19 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     color: theme.palette.text.secondary,
     background: '#061218',
+    display: 'flex',
+  },
+  pic: {
+    padding: '0',
+    textAlign: 'center',
+    background: '#061218',
+    display: 'flex',
   },
   card: {
     padding: theme.spacing(0),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    background: '#061218',
+    background: '#061218',  
   }
 }));
 
@@ -46,20 +55,20 @@ function Notification() {
   const markersList = data.notification.map((item, index) => {
     return {label: item.type, location: [item.location.lat, item.location.lon]}
   })
-  console.log(data);
+  const picturesData = data.notification[0].pictures;
     return (
       <div className={classes.root}>
         <p style={{color: '#F4F4F4', alignSelf: 'center',  fontSize: '22px'}}>Notification ID #: {id}</p>
       <Divider />
       <Grid container spacing={3}>
         <Grid item xs={4}>
-          <Paper className={classes.paper}><KpiCard graphType kpiData={data.notification[0].kpis[0]}/></Paper>
+          <Paper className={classes.paper}><KpiCard kpiData={data.notification[0].kpis[0]}/></Paper>
         </Grid>
         <Grid item xs={4}>
-          <Paper className={classes.paper}><KpiCard graphType kpiData={data.notification[0].kpis[1]}/></Paper>
+          <Paper className={classes.paper}><KpiCard kpiData={data.notification[0].kpis[1]}/></Paper>
         </Grid>
         <Grid item xs={4}>
-          <Paper className={classes.paper}><KpiCard graphType kpiData={data.notification[0].kpis[1]}/></Paper>
+          <Paper className={classes.paper}><KpiCard kpiData={data.notification[0].kpis[2]}/></Paper>
         </Grid>
         <Grid item xs={7}>
           <NotificationMap markersList={markersList}/>
@@ -67,6 +76,11 @@ function Notification() {
         <Grid item xs={5}>
           <Paper className={classes.paper}>
             <FilteredTable tableName={"Past Measurements"} columnNames={["Instrument", "Measurement", "Date"]} rows={measurementTable}/>
+          </Paper>
+        </Grid>
+        <Grid item>
+          <Paper className={classes.pic}>
+            <PicturesCard picLable="Observarion #" picturesCard={picturesData}/>
           </Paper>
         </Grid>
       </Grid>

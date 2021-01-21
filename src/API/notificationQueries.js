@@ -1,30 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const GET_HOMEPAGEDATA = gql`
-  query homepage{
-  homeKpis{
-    id
-    name
-    avg
-    data
-    change
-  }
-  notifications{
-    id
-    street
-    type
-    location { lat, lon }
-    createdAt
-  }
-  me{
-    id
-    name
-    photo
-    email
-  }
-}
-`;
-
 export const NOTIF_BYID = gql`
   query notifbyid ($id: Int!){
     notification (id:$id) {

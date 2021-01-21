@@ -8,7 +8,7 @@ export default function AreaGraph({data}) {
   return (
       <div>
       <VictoryChart 
-      minDomain={{ y: 0 }}
+      minDomain={{ y: 0 }}    
       height={180}
       theme={VictoryTheme.material}
       style={{

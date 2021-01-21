@@ -6,10 +6,10 @@ const arrayToData = (data) => data.map((y, x) => ({x: x, y: y}))
 export default function LineGraph({data}) {
     
     return (
-        <div>
+        <div>     
         <VictoryChart 
         minDomain={{ y: 0 }}
-        height={180}
+        height={195}
         theme={VictoryTheme.material}
         style={{
           background: {

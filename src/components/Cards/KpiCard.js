@@ -7,18 +7,18 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'left',
     backgroundColor: '#061218',
+    height: '190px'
   },
   details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  details2: {
     display: 'flex',
     flexDirection: 'row',
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     width: 151,
-    height: 151,
+    height: 150,
     borderRadius: '50%',
   },
   controls: {
@@ -49,8 +49,8 @@ const useStyles = makeStyles((theme) => ({
 export default function KpiCard(props) {
   const classes = useStyles();
   const graphType = props.graphType;
-  const {id, name, avg, data, change } = props.kpiData;
-
+  const {id, name, avg, data, type, change } = props.kpiData;
+  const changeDir = props.changeDir;
   return (
     <Card className={classes.root}>
       <div>
@@ -60,13 +60,14 @@ export default function KpiCard(props) {
           </Typography>
         </CardContent>
       </div>
-      <div className={classes.details2}>
+      <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography noWrap style={{fontWeight: 'bold', fontSize: '33px', paddingRight: '28px'}}>
-            {avg}
+            {avg} {type}
           </Typography>
-          <Typography noWrap variant="subtitle1" color='white'>
-            {change}
+          <Typography noWrap variant="subtitle2" color='white'>
+            {changeDir ? <ArrowUpwardIcon style={{fill: "green"}}/> : <ArrowDownwardIcon style={{fill: "red"}}/>}
+              <br/>{change} by 1 year
           </Typography>
         </CardContent>
         {graphType ? <LineGraph key={id} data={data}/> : <AreaGraph key={id} data={data}/>}

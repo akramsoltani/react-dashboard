@@ -8,7 +8,7 @@ import ProfileCard from 'components/Cards/ProfileCard';
 import KpiCard from "components/Cards/KpiCard";
 import FilteredTable from 'components/FilteredTable';
 import { useQuery } from '@apollo/client';
-import { GET_HOMEPAGEDATA } from "API/queries";
+import { GET_HOMEPAGEDATA } from "API/homeQueries";
 
 const useStyles = makeStyles((theme) => ({
   root: {

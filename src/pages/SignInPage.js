@@ -16,24 +16,27 @@ import { Link } from 'react-router-dom';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://roadeo.io/">
+        ROADEO  
       </Link>{' '}
       {new Date().getFullYear()}
-      {'.'}
     </Typography>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: theme.spacing(3),
+    borderRadius: '20px',
+    backgroundColor: '#DFE7E7',
+  },
   paper: {
     marginTop: theme.spacing(15),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    color: 'white'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -47,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   inputColor: {
-    color: 'white'
   }
 }));
 
@@ -55,7 +57,7 @@ export default function SignIn() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container className={classes.container} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -106,12 +108,12 @@ export default function SignIn() {
           
           <Grid container>
             <Grid item xs>
-              <Link style={{color: 'white'}} >
+              <Link >
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link style={{color: 'white'}} >
+              <Link >
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
